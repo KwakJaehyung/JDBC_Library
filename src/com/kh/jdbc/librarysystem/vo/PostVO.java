@@ -6,14 +6,14 @@ public class PostVO {
     private int postNo;
     private String title;
     private String userID;
-    private String content;
+    private String pContent;
     private Date postDate;
 
-    public PostVO(int postNo, String title, String userID, String content, Date postDate) {
+    public PostVO(int postNo, String title, String userID, String pContent, Date postDate) {
         this.postNo = postNo;
         this.title = title;
         this.userID = userID;
-        this.content = content;
+        this.pContent = pContent;
         this.postDate = postDate;
     }
 
@@ -41,12 +41,12 @@ public class PostVO {
         this.userID = userID;
     }
 
-    public String getContent() {
-        return content;
+    public String getpContent() {
+        return pContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setpContent(String pContent) {
+        this.pContent = pContent;
     }
 
     public Date getPostDate() {

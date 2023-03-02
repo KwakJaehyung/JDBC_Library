@@ -28,7 +28,7 @@ public class PostDAO {
                 int postNo = rs.getInt("POST_NO");
                 String title = rs.getString("TITLE");
                 String userID = rs.getString("USER_ID");
-                String content = rs.getString("CONTENT");
+                String content = rs.getString("PCONTENT");
                 Date postDate = rs.getDate("POST_DATE");
                 PostVO vo = new PostVO(postNo, title, userID, content, postDate);
                 list.add(vo);
@@ -41,18 +41,48 @@ public class PostDAO {
     }
 
     public void postSelectPrn(List<PostVO> list) {
-        System.out.println("게시글번호    글제목    글작성자    글내용    글작성날자");
-        System.out.println("---------------------------------------------------------");
+        System.out.println("======================== 게시판 ========================");
+        System.out.println("글 번호              글 제목           글 작성자    글 작성 일자");
+        System.out.println("-------------------------------------------------------");
         for (PostVO e : list) {
-            System.out.print(e.getPostNo() + " ");
-            System.out.print(e.getTitle() + " ");
+            System.out.print(e.getPostNo() + "       ");
+            System.out.print(e.getTitle() + "     ");
             System.out.print(e.getUserID() + " ");
-            System.out.print(e.getContent() + " ");
+            //System.out.print(e.getpContent() + " ");
             System.out.print(e.getPostDate() + " ");
             System.out.println();
         }
         System.out.println("---------------------------------------------------------");
     }
+
+    public void postShow(List<PostVO> list, int num) {
+
+        String sql = "SELECT * FROM POST WHERE POST_NO = " + num;
+
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println();
+                System.out.print("게시글 번호: " + rs.getInt("POST_NO") + " ");
+                System.out.print("제목: " + rs.getString("TITLE") + " ");
+                System.out.println("작성자: " + rs.getString("USER_ID") + " ");
+                System.out.println("내용: " + rs.getString("PCONTENT"));
+                System.out.println("---------------------------------------------------------");
+                System.out.println("댓글: ");
+                System.out.print("댓글 작성자: ");
+                System.out.println("댓글 작성일: ");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     public void postInsert() {
         System.out.println("글 정보를 입력하세요.");
